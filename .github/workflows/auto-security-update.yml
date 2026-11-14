@@ -1,0 +1,91 @@
+name: Auto Security Threat Update
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-bots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch and merge ai-robots-txt threat list
+        run: |
+          python3 - <<'EOF'
+          import json
+          import urllib.request
+          from pathlib import Path
+
+          SOURCE_URL = "https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/main/robots.json"
+          TARGET_FILE = Path("security/bots.json")
+
+          baseline_bots = {
+              "GPTBot",
+              "CCBot",
+              "Google-Extended",
+              "ClaudeBot",
+              "Bytespider",
+              "Amazonbot",
+              "PerplexityBot",
+              "Applebot-Extended",
+              "ia_archiver",
+              "archive.org_bot",
+              "Scrapy",
+              "HeadlessChrome",
+              "PhantomJS",
+              "Selenium",
+              "Playwright",
+          }
+
+          if TARGET_FILE.exists():
+              try:
+                  existing = json.loads(TARGET_FILE.read_text(encoding="utf-8"))
+                  if isinstance(existing, list):
+                      baseline_bots.update(str(x).strip() for x in existing if str(x).strip())
+              except Exception as exc:
+                  print(f"Warning: could not parse existing bots.json: {exc}")
+
+          req = urllib.request.Request(
+              SOURCE_URL,
+              headers={"User-Agent": "sanatsal-tema-security-updater/1.0"}
+          )
+          with urllib.request.urlopen(req, timeout=30) as resp:
+              data = json.loads(resp.read().decode("utf-8"))
+
+          if isinstance(data, dict):
+              for key in data.keys():
+                  name = str(key).strip()
+                  if name:
+                      baseline_bots.add(name)
+          elif isinstance(data, list):
+              for item in data:
+                  name = str(item).strip()
+                  if name:
+                      baseline_bots.add(name)
+
+          sorted_bots = sorted(baseline_bots, key=lambda s: s.lower())
+          TARGET_FILE.parent.mkdir(parents=True, exist_ok=True)
+          TARGET_FILE.write_text(
+              json.dumps(sorted_bots, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8"
+          )
+          print(f"Updated {TARGET_FILE} with {len(sorted_bots)} signatures.")
+          EOF
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet security/bots.json; then
+            echo "No changes to security/bots.json."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add security/bots.json
+          git commit -m "chore(security): update bot threat database from ai-robots-txt"
+          git push

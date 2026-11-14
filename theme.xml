@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateUrl='indie.xml' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' lang='tr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title><data:blog.pageTitle/></title>
+
+  <!-- Privacy & Anti-Indexing Hardening -->
+  <meta content='noarchive, noimageindex, max-snippet:150' name='robots'/>
+  <meta content='noarchive, noimageindex' name='googlebot'/>
+  <meta content='no-referrer' name='referrer'/>
+  <meta content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://*.blogger.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.blogspot.com https://*.blogspot.com.tr https://*.blogger.com https://*.googleusercontent.com https://cdn.jsdelivr.net; font-src 'self' data: https://cdn.jsdelivr.net; connect-src 'self' https://*.blogspot.com https://*.blogspot.com.tr https://*.blogger.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self';" http-equiv='Content-Security-Policy'/>
+
+  <!-- KaTeX Stylesheet (SRI Verified) -->
+  <link crossorigin='anonymous' href='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css' integrity='sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG' rel='stylesheet'/>
+
+  <!-- Editorial Design System -->
+  <link href='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/css/style.css?v=1.0.0' rel='stylesheet'/>
+
+  <b:skin><![CDATA[ /* reset */ ]]></b:skin>
+</head>
+<body>
+  <a class='skip-link' href='#hakkimda'>İçeriğe Atla</a>
+
+  <div data-bots-url='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/security/bots.json?v=1.0.0' id='app'>
+    <!-- 1. Sticky Üst Menü -->
+    <header class='site-header'>
+      <div class='container header-inner'>
+        <a class='brand-mark' href='#hakkimda'>
+          <span aria-hidden='true' class='brand-dot'></span>
+          <span>Editoryal Arşiv</span>
+        </a>
+
+        <nav aria-label='Ana Gezinme'>
+          <ul class='nav-links' id='nav-links'>
+            <li><a href='#hakkimda'>Hakkımda</a></li>
+            <li><a href='#ozgecmis'>Özgeçmiş</a></li>
+            <li><a href='#portfolyo'>Portfolyo</a></li>
+            <li><a href='#yazilar'>Yazılar</a></li>
+            <li><a href='#galeri'>Galeri</a></li>
+            <li><a href='#iletisim'>İletişim</a></li>
+          </ul>
+        </nav>
+
+        <div class='header-actions'>
+          <button aria-label='Koyu temaya geç' class='theme-toggle' id='theme-toggle' type='button'>☾</button>
+          <button aria-controls='nav-links' aria-expanded='false' aria-label='Menüyü aç' class='mobile-menu-btn' id='mobile-menu-btn' type='button'>☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- 2. Hero & Hakkımda -->
+      <section class='section hero-section' id='hakkimda'>
+        <div class='container hero-grid'>
+          <div>
+            <div class='hero-eyebrow'>Monografi &amp; Araştırma Notları</div>
+            <h1 class='hero-name' id='hero-name'>Yükleniyor…</h1>
+            <div class='hero-role' id='hero-role'></div>
+            <div class='hero-bio' id='hero-bio'></div>
+            <div class='skills-wrap' id='hero-skills'></div>
+          </div>
+          <aside class='hero-aside-card'>
+            <div class='hero-aside-title'>Katalog Özeti</div>
+            <ul class='hero-meta-list' id='hero-meta-list'></ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 3. Özgeçmiş (Davranışsal Kalkan Korumalı) -->
+      <section class='section section-alt' id='ozgecmis'>
+        <div class='container'>
+          <div class='section-header'>
+            <span class='section-kicker'>Kronoloji</span>
+            <h2 class='section-title'>Özgeçmiş</h2>
+            <p class='section-subtitle'>Akademik görevler, araştırma deneyimleri ve mühendislik geçmişi.</p>
+          </div>
+          <div id='ozgecmis-content'></div>
+        </div>
+      </section>
+
+      <!-- 4. Portfolyo -->
+      <section class='section' id='portfolyo'>
+        <div class='container'>
+          <div class='section-header'>
+            <span class='section-kicker'>Seçili Çalışmalar</span>
+            <h2 class='section-title'>Portfolyo</h2>
+            <p class='section-subtitle'>Sistem mimarisi, araştırma prototipleri ve teknik projeler.</p>
+          </div>
+          <div class='card-grid' id='portfolyo-grid'></div>
+        </div>
+      </section>
+
+      <!-- 5. Yazılar -->
+      <section class='section section-alt' id='yazilar'>
+        <div class='container'>
+          <div class='section-header'>
+            <span class='section-kicker'>Yayınlar &amp; Denemeler</span>
+            <h2 class='section-title'>Yazılar</h2>
+            <p class='section-subtitle'>Mühendislik analizleri, fotoğrafçılık, gezi ve mekanik üzerine notlar.</p>
+          </div>
+          <div aria-label='Kategori Filtreleri' class='filter-bar' id='yazilar-filters' role='group'></div>
+          <div class='card-grid' id='yazilar-grid'></div>
+        </div>
+      </section>
+
+      <!-- 6. Fotoğraf Galerisi (Medya Kalkanı + Davranışsal Kalkan) -->
+      <section class='section' id='galeri'>
+        <div class='container'>
+          <div class='section-header'>
+            <span class='section-kicker'>Görsel Arşiv</span>
+            <h2 class='section-title'>Fotoğraf Galerisi</h2>
+            <p class='section-subtitle'>Belgesel ve mimari fotoğraf seçkisi.</p>
+          </div>
+          <div id='galeri-content'></div>
+        </div>
+      </section>
+
+      <!-- 7. İletişim & Footer -->
+      <section class='section section-alt' id='iletisim'>
+        <div class='container'>
+          <div class='section-header'>
+            <span class='section-kicker'>Erişim</span>
+            <h2 class='section-title'>İletişim</h2>
+          </div>
+          <div id='iletisim-content'></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class='site-footer'>
+      <div class='container'>
+        <span>Zero-PII Başsız Yayın Altyapısı · Tüm hakları saklıdır.</span>
+      </div>
+    </footer>
+
+    <!-- Tam Ekran Okuyucu Modalı -->
+    <div aria-hidden='true' aria-modal='true' class='modal-backdrop' id='reader-modal' role='dialog'>
+      <div class='modal-dialog'>
+        <div class='modal-header'>
+          <span class='modal-meta' id='reader-modal-meta'></span>
+          <button aria-label='Okuyucuyu kapat' class='modal-close' id='reader-modal-close' type='button'>×</button>
+        </div>
+        <article class='modal-body' id='reader-modal-body'></article>
+      </div>
+    </div>
+
+    <!-- Lightbox Modalı -->
+    <div aria-hidden='true' aria-modal='true' class='modal-backdrop' id='lightbox-modal' role='dialog'>
+      <div class='lightbox-dialog'>
+        <div class='lightbox-controls'>
+          <button class='lightbox-nav-btn' id='lightbox-prev' type='button'>← Önceki</button>
+          <span class='lightbox-caption' id='lightbox-caption'></span>
+          <div>
+            <button class='lightbox-nav-btn' id='lightbox-next' type='button'>Sonraki →</button>
+            <button aria-label='Galeriyi kapat' class='lightbox-nav-btn' id='lightbox-close' type='button'>×</button>
+          </div>
+        </div>
+        <div class='lightbox-frame media-shield'>
+          <img alt='' id='lightbox-img' src=''/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blogger Zorunlu Gizli Widget Bölümü -->
+  <div aria-hidden='true' style='display:none;'>
+    <b:section id='main' showaddelement='no'>
+      <b:widget id='Blog1' locked='true' title='Blog Kayıtları' type='Blog'/>
+    </b:section>
+  </div>
+
+  <!-- SRI Doğrulamalı Kütüphaneler & Uygulama Motoru -->
+  <script crossorigin='anonymous' defer='defer' integrity='sha384-P0JNneQf81HOl9VwNXK76cQ9VMD6Nfsnepxb0cCOg8+UzEdzgPHAPV4wVQrvYQSx' src='https://cdn.jsdelivr.net/npm/dompurify@3.4.16/dist/purify.min.js'></script>
+  <script crossorigin='anonymous' defer='defer' integrity='sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE' src='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js'></script>
+  <script crossorigin='anonymous' defer='defer' integrity='sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz' src='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/contrib/auto-render.min.js'></script>
+  <script defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/app.js?v=1.0.0'></script>
+</body>
+</html>
