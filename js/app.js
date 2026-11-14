@@ -1119,7 +1119,9 @@
     }
     return new Promise(function (resolve) {
       const s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/dompurify@3.4.16/dist/purify.min.js';
+      s.src = isLocalEnvironment()
+        ? './js/purify.min.js'
+        : 'https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.6';
       s.crossOrigin = 'anonymous';
       s.onload = function () { resolve(); };
       s.onerror = function () { resolve(); };

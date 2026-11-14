@@ -5,13 +5,13 @@
 - `preview.html` için yalnızca kurgusal/anonim test verileri kullan. Gerçek veriler sadece Blogger JSON Feed üzerinden çekilir.
 
 ## 2. Blogger XML ve CDN Kuralları
-- `theme.xml` içinde tüm etiketler geçerli XHTML/XML formatında kapatılmalı (`<meta .../>`, `<link .../>`), URL parametrelerindeki `&` karakterleri `&amp;` olarak kaçırılmalıdır.
+- `theme.xml` içinde tüm etiketler geçerli XHTML/XML formatında kapatılmalı (`<meta .../>`, `<link .../>`), `<script>` etiketlerinin Blogger XML derleyicisi tarafından kendi kendine kapatılmasını (`/>`) önlemek için içlerine `/* */` eklenmeli, URL parametrelerindeki `&` karakterleri `&amp;` olarak kaçırılmalıdır.
 - CSS veya JS dosyalarında değişiklik yapıldığında jsDelivr önbelleğini yenilemek için `theme.xml` içindeki `?v=1.0.x` sürüm numarasını bir artır.
 - Zorunlu Blogger `<b:skin>` ve `<b:widget id='Blog1'>` bloklarına dokunma.
 
 ## 3. Uygulama Güvenliği (XSS, SRI, CSP, Anti-Bot)
 - Blogger JSON Feed'den gelen tüm HTML içerikleri `DOMPurify.sanitize()` ile temizlenmeden DOM'a basılmamalıdır.
-- `theme.xml` ve `preview.html` içindeki `dompurify@3.4.16` script etiketinin bütünlük özetini koru: `integrity="sha384-a7Sz0xErzJ3ZpQz0zJ32d67dSitNzPcbfybc/ykU9KJhMgZkwqfSxlhhdJRS+XGL"`.
+- `DOMPurify` kütüphanesi harici SRI uyuşmazlıklarını önlemek için doğrudan repo içinde (`js/purify.min.js`) barındırılır; `theme.xml` içinde `https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.x` ve `preview.html` içinde `./js/purify.min.js` üzerinden yüklenir.
 - Sağ tık (`contextmenu`), sürükleme (`dragstart`) ve kopyalama caydırıcılığını koru; `security/bots.json` ve `navigator.webdriver` kontrollerini devre dışı bırakma.
 
 ## 4. Matematiksel Dizgi (KaTeX) ve Veri Yönlendirme
