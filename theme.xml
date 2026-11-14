@@ -16,14 +16,14 @@
   <link crossorigin='anonymous' href='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css' integrity='sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG' rel='stylesheet'/>
 
   <!-- Editorial Design System -->
-  <link href='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/css/style.css?v=1.0.7' rel='stylesheet'/>
+  <link href='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/css/style.css?v=1.0.8' rel='stylesheet'/>
 
   <b:skin><![CDATA[ /* reset */ ]]></b:skin>
 </head>
 <body>
   <a class='skip-link' href='#hakkimda'>İçeriğe Atla</a>
 
-  <div data-bots-url='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/security/bots.json?v=1.0.7' id='app'>
+  <div data-bots-url='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/security/bots.json?v=1.0.8' id='app'>
     <!-- 1. Sticky Üst Menü -->
     <header class='site-header'>
       <div class='container header-inner'>
@@ -134,9 +134,11 @@
 
     <footer class='site-footer'>
       <div class='container'>
-        <span>Zero-PII Başsız Yayın Altyapısı · Tüm hakları saklıdır.</span>
+        <span>© <span id='footer-year'>2026</span> <data:blog.title/> · Tüm hakları saklıdır.</span>
       </div>
     </footer>
+
+    <button aria-label='Yukarı çık' class='back-to-top' id='back-to-top' type='button'>↑</button>
 
     <!-- Tam Ekran Okuyucu Modalı -->
     <div aria-hidden='true' aria-modal='true' class='modal-backdrop' id='reader-modal' role='dialog'>
@@ -179,9 +181,9 @@
   </div>
 
   <!-- SRI Doğrulamalı Kütüphaneler & Uygulama Motoru -->
-  <script crossorigin='anonymous' defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.7'>/* */</script>
+  <script crossorigin='anonymous' defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.8'>/* */</script>
   <script crossorigin='anonymous' defer='defer' integrity='sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE' src='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js'>/* */</script>
   <script crossorigin='anonymous' defer='defer' integrity='sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz' src='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/contrib/auto-render.min.js'>/* */</script>
-  <script defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/app.js?v=1.0.7'>/* */</script>
+  <script defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/app.js?v=1.0.8'>/* */</script>
 </body>
 </html>

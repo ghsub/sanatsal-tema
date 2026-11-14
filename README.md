@@ -4,6 +4,8 @@ Blogger'ı arka planda başsız (headless) CMS olarak kullanan, **Sıfır Kişis
 
 > **Gizlilik İlkesi:** Bu depo `Public` olarak tasarlanmıştır. Depo içerisinde gerçek isim, e-posta, telefon, adres, gerçek özgeçmiş veya kişisel fotoğraf bağlantısı **bulunmaz**. Tüm gerçek içerikler yalnızca çalışma anında Blogger JSON beslemesinden (`/feeds/posts/default?alt=json&max-results=150`) çekilir.
 
+> **Kullanma Kılavuzu:** Yeni yazı ekleme, kullanılabilir etiketler, KaTeX formülleri ve fotoğraf yükleme adımları için dinamik **[Blog Nasıl Yazılır Rehberi](docs/BLOG_NASIL_YAZILIR.md)** belgesini inceleyin.
+
 ---
 
 ## Dosya Yapısı

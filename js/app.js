@@ -126,7 +126,7 @@
     renderShieldNotice('galeri-content', 'Medya Kalkanı Aktif — Galeriyi yüklemek için sayfada hareket edin veya kaydırın.');
     renderShieldNotice('iletisim-content', 'Bot Koruması Aktif — İletişim kanallarını görmek için etkileşim bekleniyor.');
 
-    const triggerEvents = ['mousemove', 'scroll', 'touchstart', 'keydown', 'pointerdown'];
+    const triggerEvents = ['mousemove', 'scroll', 'touchstart', 'keydown', 'pointerdown', 'focusin'];
     const onHumanSignal = function () {
       if (state.userInteracted || state.isBot) return;
       state.userInteracted = true;
@@ -206,10 +206,27 @@
     if (!dirty) return '';
     if (typeof window.DOMPurify !== 'undefined' && window.DOMPurify && typeof window.DOMPurify.sanitize === 'function') {
       return window.DOMPurify.sanitize(dirty, {
-        ADD_ATTR: ['loading', 'target', 'rel']
+        ADD_ATTR: ['loading', 'target', 'rel', 'data-encoded-email'],
+        FORBID_TAGS: ['style', 'iframe', 'object', 'embed', 'form', 'input', 'textarea', 'select'],
+        FORBID_ATTR: ['style', 'onerror', 'onload', 'onclick']
       });
     }
     return stripTags(dirty);
+  }
+
+  function normalizeLabel(label) {
+    const trMap = {
+      'ç': 'c', 'Ç': 'c',
+      'ğ': 'g', 'Ğ': 'g',
+      'ı': 'i', 'İ': 'i',
+      'ö': 'o', 'Ö': 'o',
+      'ş': 's', 'Ş': 's',
+      'ü': 'u', 'Ü': 'u'
+    };
+    return String(label || '')
+      .replace(/[çÇğĞıİöÖşŞüÜ]/g, function (ch) { return trMap[ch] || ch; })
+      .toLowerCase()
+      .trim();
   }
 
   function slugify(text) {
@@ -246,6 +263,9 @@
       }
       img.setAttribute('loading', 'lazy');
       img.setAttribute('draggable', 'false');
+    });
+    doc.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+      a.setAttribute('rel', 'noopener noreferrer');
     });
     return doc.body.innerHTML;
   }
@@ -333,8 +353,9 @@
       const labels = Array.isArray(entry.category)
         ? entry.category.map(function (c) { return c.term; })
         : [];
+      const normLabels = labels.map(normalizeLabel);
 
-      if (labels.some(function (l) { return l.toLowerCase() === 'hakkimda'; })) {
+      if (normLabels.includes('hakkimda')) {
         parsed.profile = parseProfileEntry(title, rawHtml, parsed.profile.name);
         const contactExtracted = parseContactFromHtml(rawHtml);
         if (contactExtracted.socials.length || contactExtracted.encodedEmail) {
@@ -343,28 +364,28 @@
         return;
       }
 
-      if (labels.includes('Ozgecmis')) {
+      if (normLabels.includes('ozgecmis')) {
         parsed.resume = parseResumeEntry(rawHtml);
         return;
       }
 
-      if (labels.includes('Iletisim')) {
+      if (normLabels.includes('iletisim')) {
         parsed.contact = parseContactFromHtml(rawHtml);
         return;
       }
 
-      if (labels.includes('Galeri')) {
+      if (normLabels.includes('galeri')) {
         const imgs = extractGalleryImages(rawHtml, title);
         parsed.gallery = parsed.gallery.concat(imgs);
         return;
       }
 
-      if (labels.includes('Portfolyo')) {
+      if (normLabels.includes('portfolyo')) {
         parsed.portfolio.push({
           id: slugify(title),
           slug: slugify(title),
           title: title,
-          category: labels.find(function (l) { return l !== 'Portfolyo'; }) || 'Proje',
+          category: labels.find(function (l) { return normalizeLabel(l) !== 'portfolyo'; }) || 'Proje',
           date: formatDateTR(published),
           excerpt: extractPlainExcerpt(rawHtml, 160),
           html: enhanceImagesInHtml(rawHtml)
@@ -372,8 +393,8 @@
         return;
       }
 
-      const articleCat = labels.find(function (l) {
-        return CATEGORIES.includes(l) && l !== 'Tümü';
+      const articleCat = CATEGORIES.find(function (cat) {
+        return cat !== 'Tümü' && normLabels.includes(normalizeLabel(cat));
       }) || 'Mühendislik Notları';
 
       parsed.articles.push({
@@ -1186,11 +1207,36 @@
       const s = document.createElement('script');
       s.src = isLocalEnvironment()
         ? './js/purify.min.js'
-        : 'https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.6';
+        : 'https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.8';
       s.crossOrigin = 'anonymous';
       s.onload = function () { resolve(); };
       s.onerror = function () { resolve(); };
       document.head.appendChild(s);
+    });
+  }
+
+  function initFooterAndScrollTop() {
+    const yearEl = document.getElementById('footer-year');
+    if (yearEl) {
+      yearEl.textContent = String(new Date().getFullYear());
+    }
+
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    const toggleVisibility = function () {
+      if (window.scrollY > 320) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    toggleVisibility();
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
@@ -1204,6 +1250,7 @@
     initMobileNav();
     initDeterrence();
     initModals();
+    initFooterAndScrollTop();
 
     const [botDetected, loadedData] = await Promise.all([
       evaluateBotStatus(),
