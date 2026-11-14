@@ -160,9 +160,7 @@
      ======================================================================== */
   function initDeterrence() {
     document.addEventListener('contextmenu', function (e) {
-      if (e.target.closest('.media-shield, .protected-content, #ozgecmis, #yazilar, #galeri, .modal-body, img')) {
-        e.preventDefault();
-      }
+      e.preventDefault();
     });
 
     document.addEventListener('dragstart', function (e) {
