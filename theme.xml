@@ -16,14 +16,14 @@
   <link crossorigin='anonymous' href='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css' integrity='sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG' rel='stylesheet'/>
 
   <!-- Editorial Design System -->
-  <link href='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/css/style.css?v=1.0.6' rel='stylesheet'/>
+  <link href='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/css/style.css?v=1.0.7' rel='stylesheet'/>
 
   <b:skin><![CDATA[ /* reset */ ]]></b:skin>
 </head>
 <body>
   <a class='skip-link' href='#hakkimda'>İçeriğe Atla</a>
 
-  <div data-bots-url='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/security/bots.json?v=1.0.6' id='app'>
+  <div data-bots-url='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/security/bots.json?v=1.0.7' id='app'>
     <!-- 1. Sticky Üst Menü -->
     <header class='site-header'>
       <div class='container header-inner'>
@@ -100,7 +100,10 @@
             <h2 class='section-title'>Yazılar</h2>
             <p class='section-subtitle'>Mühendislik analizleri, fotoğrafçılık, gezi ve mekanik üzerine notlar.</p>
           </div>
-          <div aria-label='Kategori Filtreleri' class='filter-bar' id='yazilar-filters' role='group'></div>
+          <div class='yazilar-toolbar'>
+            <div aria-label='Kategori Filtreleri' class='filter-bar' id='yazilar-filters' role='group'></div>
+            <input aria-label='Yazılarda ara' class='search-input' id='yazilar-search' placeholder='Yazılarda ara…' type='search'/>
+          </div>
           <div class='card-grid' id='yazilar-grid'></div>
         </div>
       </section>
@@ -142,6 +145,10 @@
           <span class='modal-meta' id='reader-modal-meta'></span>
           <button aria-label='Okuyucuyu kapat' class='modal-close' id='reader-modal-close' type='button'>×</button>
         </div>
+        <div aria-hidden='true' class='reader-progress-track'>
+          <div class='reader-progress-bar' id='reader-progress-bar'></div>
+        </div>
+        <nav aria-label='İçindekiler' class='reader-toc' hidden='hidden' id='reader-toc'></nav>
         <article class='modal-body' id='reader-modal-body'></article>
       </div>
     </div>
@@ -172,9 +179,9 @@
   </div>
 
   <!-- SRI Doğrulamalı Kütüphaneler & Uygulama Motoru -->
-  <script crossorigin='anonymous' defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.6'>/* */</script>
+  <script crossorigin='anonymous' defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/purify.min.js?v=1.0.7'>/* */</script>
   <script crossorigin='anonymous' defer='defer' integrity='sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE' src='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js'>/* */</script>
   <script crossorigin='anonymous' defer='defer' integrity='sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz' src='https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/contrib/auto-render.min.js'>/* */</script>
-  <script defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/app.js?v=1.0.6'>/* */</script>
+  <script defer='defer' src='https://cdn.jsdelivr.net/gh/ghsub/sanatsal-tema@main/js/app.js?v=1.0.7'>/* */</script>
 </body>
 </html>

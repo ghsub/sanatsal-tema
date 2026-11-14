@@ -23,6 +23,7 @@
     userInteracted: false,
     sensitiveRendered: false,
     activeCategory: 'Tümü',
+    searchQuery: '',
     galleryLimit: GALLERY_PAGE_SIZE,
     lightboxIndex: 0,
     data: {
@@ -778,17 +779,36 @@
     });
   }
 
+  function initSearch() {
+    const input = document.getElementById('yazilar-search');
+    if (!input || input.dataset.bound) return;
+    input.dataset.bound = '1';
+    input.addEventListener('input', function () {
+      state.searchQuery = input.value.trim().toLowerCase();
+      renderArticles();
+    });
+  }
+
   function renderArticles() {
+    initSearch();
     const container = document.getElementById('yazilar-grid');
     if (!container) return;
     container.innerHTML = '';
 
-    const filtered = state.activeCategory === 'Tümü'
+    let filtered = state.activeCategory === 'Tümü'
       ? state.data.articles
       : state.data.articles.filter(function (a) { return a.category === state.activeCategory; });
 
+    if (state.searchQuery) {
+      filtered = filtered.filter(function (a) {
+        return (a.title && a.title.toLowerCase().includes(state.searchQuery)) ||
+          (a.excerpt && a.excerpt.toLowerCase().includes(state.searchQuery)) ||
+          (a.category && a.category.toLowerCase().includes(state.searchQuery));
+      });
+    }
+
     if (!filtered.length) {
-      container.innerHTML = '<p class="section-subtitle">Bu kategoride henüz yazı bulunmuyor.</p>';
+      container.innerHTML = '<p class="section-subtitle">Arama veya kategori kriterine uygun yazı bulunamadı.</p>';
       return;
     }
 
@@ -1004,6 +1024,7 @@
     }
 
     bodyEl.innerHTML = sanitizeHTML(item.html);
+    bodyEl.scrollTop = 0;
 
     if (typeof window.renderMathInElement === 'function') {
       window.renderMathInElement(bodyEl, {
@@ -1015,6 +1036,10 @@
       });
     }
 
+    buildReaderToc(bodyEl);
+    updateReaderProgress(bodyEl);
+    bodyEl.onscroll = function () { updateReaderProgress(bodyEl); };
+
     backdrop.classList.add('open');
     backdrop.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -1022,6 +1047,46 @@
     if (window.history && window.history.replaceState) {
       window.history.replaceState(null, '', '#' + item.slug);
     }
+  }
+
+  function buildReaderToc(bodyEl) {
+    const tocEl = document.getElementById('reader-toc');
+    if (!tocEl) return;
+    tocEl.innerHTML = '';
+
+    const headings = Array.from(bodyEl.querySelectorAll('h2, h3'));
+    if (headings.length < 2) {
+      tocEl.hidden = true;
+      return;
+    }
+
+    const label = document.createElement('span');
+    label.className = 'reader-toc-title';
+    label.textContent = 'İçindekiler:';
+    tocEl.appendChild(label);
+
+    headings.forEach(function (h, idx) {
+      const hid = 'sec-' + idx + '-' + slugify(h.textContent);
+      h.id = hid;
+      const link = document.createElement('a');
+      link.href = '#' + hid;
+      link.textContent = h.textContent;
+      if (h.tagName === 'H3') link.className = 'toc-sub';
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      tocEl.appendChild(link);
+    });
+    tocEl.hidden = false;
+  }
+
+  function updateReaderProgress(bodyEl) {
+    const bar = document.getElementById('reader-progress-bar');
+    if (!bar || !bodyEl) return;
+    const maxScroll = bodyEl.scrollHeight - bodyEl.clientHeight;
+    const pct = maxScroll > 0 ? Math.min(100, Math.round((bodyEl.scrollTop / maxScroll) * 100)) : 100;
+    bar.style.width = pct + '%';
   }
 
   function closeReaderModal() {

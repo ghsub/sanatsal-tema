@@ -590,12 +590,38 @@ button {
   margin-top: 0.5rem;
 }
 
-/* Filter Bar */
+/* Filter & Search Toolbar */
+.yazilar-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2rem;
+}
+
+.search-input {
+  min-width: 220px;
+  flex: 0 1 280px;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.88rem;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  transition: border-color var(--transition);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-navy);
 }
 
 .filter-btn {
@@ -841,6 +867,50 @@ button {
   color: var(--text-primary);
   font-size: 1.2rem;
   line-height: 1;
+}
+
+.reader-progress-track {
+  width: 100%;
+  height: 3px;
+  background-color: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.reader-progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: var(--accent-brick);
+  transition: width 0.08s linear;
+}
+
+.reader-toc {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+.reader-toc-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.reader-toc a {
+  color: var(--accent-navy);
+  font-weight: 500;
+}
+
+.reader-toc a.toc-sub {
+  color: var(--text-secondary);
+  font-weight: 400;
 }
 
 .modal-body {

@@ -97,7 +97,10 @@
             <h2 class="section-title">Yazılar</h2>
             <p class="section-subtitle">Mühendislik analizleri, fotoğrafçılık, gezi ve mekanik üzerine notlar.</p>
           </div>
-          <div class="filter-bar" id="yazilar-filters" role="group" aria-label="Kategori Filtreleri"></div>
+          <div class="yazilar-toolbar">
+            <div class="filter-bar" id="yazilar-filters" role="group" aria-label="Kategori Filtreleri"></div>
+            <input type="search" class="search-input" id="yazilar-search" placeholder="Yazılarda ara…" aria-label="Yazılarda ara" />
+          </div>
           <div class="card-grid" id="yazilar-grid"></div>
         </div>
       </section>
@@ -139,6 +142,10 @@
           <span class="modal-meta" id="reader-modal-meta"></span>
           <button type="button" class="modal-close" id="reader-modal-close" aria-label="Okuyucuyu kapat">×</button>
         </div>
+        <div class="reader-progress-track" aria-hidden="true">
+          <div class="reader-progress-bar" id="reader-progress-bar"></div>
+        </div>
+        <nav class="reader-toc" id="reader-toc" aria-label="İçindekiler" hidden></nav>
         <article class="modal-body" id="reader-modal-body"></article>
       </div>
     </div>
