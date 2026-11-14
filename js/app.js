@@ -188,15 +188,27 @@
   /* ========================================================================
      5. Helpers: Sanitization, Slugify, Full-Res Blogger URLs, Reading Time
      ======================================================================== */
+  function stripTags(html) {
+    if (!html) return '';
+    try {
+      const doc = new DOMParser().parseFromString(String(html), 'text/html');
+      const text = (doc.body && doc.body.textContent) || '';
+      const esc = document.createElement('div');
+      esc.textContent = text;
+      return esc.innerHTML;
+    } catch (_) {
+      return String(html).replace(/<[^>]*>/g, '');
+    }
+  }
+
   function sanitizeHTML(dirty) {
-    if (window.DOMPurify && typeof window.DOMPurify.sanitize === 'function') {
+    if (!dirty) return '';
+    if (typeof window.DOMPurify !== 'undefined' && window.DOMPurify && typeof window.DOMPurify.sanitize === 'function') {
       return window.DOMPurify.sanitize(dirty, {
         ADD_ATTR: ['loading', 'target', 'rel']
       });
     }
-    const div = document.createElement('div');
-    div.textContent = dirty;
-    return div.innerHTML;
+    return stripTags(dirty);
   }
 
   function slugify(text) {
