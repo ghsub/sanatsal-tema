@@ -124,6 +124,22 @@ button {
   top: 1rem;
 }
 
+/* Local Preview Banner (hidden in live Blogger) */
+.preview-banner {
+  background-color: var(--accent-navy);
+  color: #FAF9F6;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: 0.45rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+[data-theme="dark"] .preview-banner {
+  color: #141413;
+}
+
 /* Container & Sections */
 .container {
   width: 100%;

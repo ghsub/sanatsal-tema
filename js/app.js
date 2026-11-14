@@ -521,12 +521,12 @@
 
     return {
       profile: {
-        name: 'Dr. Deniz Yılmaz',
-        role: 'Sistem Güvenliği Araştırmacısı & Editoryal Yazar',
-        bioHtml: '<p>Bu alan yerel önizleme modunda (<code>preview.html</code>) çalışan tamamen kurgusal bir profil örneğidir. Gerçek yayın ortamında içerikler yalnızca Blogger JSON beslemesinden dinamik olarak çekilir.</p><p>Araştırma odağı; sıfır güven (Zero-Trust) istemci mimarileri, deterministik kontrol sistemleri ve analog fotoğrafçılık üzerinedir.</p>',
-        skills: ['AppSec Mimarisi', 'Kontrol Teorisi', 'Gömülü Sistemler', 'Belgesel Fotoğrafçılık', 'Mekanik Tasarım'],
+        name: 'Dr. Deniz Kaya',
+        role: 'Makine & Sistem Mühendisi',
+        bioHtml: '<p>Bu alan yerel önizleme modunda (<code>preview.html</code>) çalışan tamamen kurgusal bir profil örneğidir. Gerçek yayın ortamında içerikler yalnızca Blogger JSON beslemesinden dinamik olarak çekilir.</p><p>Araştırma odağı; termodinamik verimlilik, akışkanlar mekaniği, otonom kontrol sistemleri ve belgesel fotoğrafçılık üzerinedir.</p>',
+        skills: ['Termodinamik', 'Akışkanlar Mekaniği', 'Kontrol Sistemleri', 'AppSec Mimarisi', 'Belgesel Fotoğrafçılık'],
         meta: [
-          { label: 'Unvan', value: 'Kıdemli Araştırmacı (Örnek)' },
+          { label: 'Unvan', value: 'Makine & Sistem Mühendisi' },
           { label: 'Konum', value: 'Önizleme Ortamı' },
           { label: 'Gizlilik Politikası', value: 'Zero-PII / No-Archive' }
         ]
@@ -534,15 +534,15 @@
       resume: [
         {
           period: '2023 – Günümüz',
-          title: 'Baş Sistem Güvenliği Mimarı',
+          title: 'Baş Sistem Güvenliği & Kontrol Mimarı',
           org: 'Örnek Araştırma Enstitüsü',
-          desc: 'Başsız içerik mimarileri, istemci tarafı tehdit modellemesi ve otonom güvenlik doğrulama hatları.'
+          desc: 'Başsız içerik mimarileri, deterministik kontrol hatları ve istemci tarafı güvenlik doğrulama sistemleri.'
         },
         {
           period: '2019 – 2023',
-          title: 'Doktora Araştırmacısı — Kontrol ve Otomasyon',
+          title: 'Doktora Araştırmacısı — Makine & Sistem Mühendisliği',
           org: 'Örnek Teknik Üniversitesi',
-          desc: 'Doğrusal olmayan dinamik sistemlerde sensör füzyonu ve gürbüz durum kestirimi üzerine tez çalışması.'
+          desc: 'Doğrusal olmayan dinamik sistemlerde sensör füzyonu, ısı transferi optimizasyonu ve gürbüz durum kestirimi.'
         },
         {
           period: '2016 – 2019',
@@ -559,7 +559,7 @@
           category: 'Gömülü Sistemler',
           date: '10 Kasım 2026',
           excerpt: 'IMU ve optik akış verilerini Kalman filtresi ile birleştiren düşük güçlü durum kestirim modülü.',
-          html: '<h1>Örnek Proje: Otonom Sensör Füzyonu</h1><p>Bu proje kartı kurgusal bir portfolyo örneğidir. Donanım maliyeti yaklaşık $100 altında tutularak yüksek kararlılık hedeflenmiştir.</p><p>Matematiksel durum güncelleme denklemi aşağıdadır:</p>$$\\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H\\hat{x}_{k|k-1})$$<p>Satır içi örnek: \\( P_{k|k} = (I - K_k H) P_{k|k-1} \\) şeklinde kovaryans güncellenir.</p>'
+          html: '<h1>Örnek Proje: Otonom Sensör Füzyonu</h1><p>Bu proje kartı kurgusal bir portfolyo örneğidir. Donanım maliyeti yaklaşık $120 altında tutularak yüksek kararlılık hedeflenmiştir.</p><p>Matematiksel durum güncelleme denklemi aşağıdadır:</p>$$\\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H\\hat{x}_{k|k-1})$$<p>Satır içi örnek: \\( P_{k|k} = (I - K_k H) P_{k|k-1} \\) şeklinde kovaryans güncellenir.</p>'
         },
         {
           id: 'ornek-proje-zero-pii-cms',
@@ -573,14 +573,14 @@
       ],
       articles: [
         {
-          id: 'kalman-filtresi-ve-enerji-butcesi',
-          slug: 'kalman-filtresi-ve-enerji-butcesi',
-          title: 'Kalman Filtresi, Gürültü Kovaryansı ve $100 Altı Sensör Bütçesi',
+          id: 'termodinamik-verimlilik-ve-butce-analizi',
+          slug: 'termodinamik-verimlilik-ve-butce-analizi',
+          title: 'Termodinamik Verimlilik, Süreklilik Denklemi ve $120 Altı Sensör Bütçesi',
           category: 'Mühendislik Notları',
           date: '12 Kasım 2026',
           readingTime: 4,
-          excerpt: 'Bütçe dostu ($100 altı) IMU modüllerinde süreç gürültüsünün matematiksel modellenmesi ve KaTeX ile denklem gösterimi.',
-          html: '<h1>Kalman Filtresi, Gürültü Kovaryansı ve $100 Altı Sensör Bütçesi</h1><p>Mühendislik projelerinde maliyet sınırı örneğin $100 veya $250 olarak belirlendiğinde, donanım gürültüsünü yazılımda telafi etmek kritik hale gelir. Dikkat edilirse metindeki $100 ifadesi KaTeX ile çakışmadan düz metin olarak kalır.</p><p>Sürekli zamanlı sistem dinamiği \\( \\dot{x}(t) = A x(t) + B u(t) + w(t) \\) olarak ifade edilir.</p><p>Ayrık zamanlı Riccati ve kazanç bağıntısı:</p>$$K_k = P_{k|k-1} H^T \\left(H P_{k|k-1} H^T + R\\right)^{-1}$$<p>Bu yaklaşım, düşük maliyetli mikrodenetleyicilerde dahi kararlı açısal kestirim sağlar.</p>'
+          excerpt: 'Carnot verimliliği, süreklilik denklemi ve $120 bütçeli düşük maliyetli telemetri sensörlerinin kalibrasyonu.',
+          html: '<h1>Termodinamik Verimlilik, Süreklilik Denklemi ve $120 Altı Sensör Bütçesi</h1><p>Mühendislik prototiplerinde sensör paketi maliyeti $120 sınırının altında tutulduğunda, yazılımsal kalibrasyon ve fiziksel modelleme kritik önem taşır. Metin içindeki $120 gibi para birimi ifadeleri KaTeX motoruyla çakışmaz.</p><p>İdeal bir ısı makinesinin teorik maksimum verimliliği satır içi olarak \\( \\eta = 1 - \\frac{T_c}{T_h} \\) bağıntısıyla hesaplanır.</p><p>Sıkıştırılamaz veya genel akışkanlar için kütle korunumu (süreklilik denklemi) blok formül olarak aşağıdadır:</p>$$\\nabla \\cdot (\\rho \\mathbf{u}) = 0$$<p>Bu temel denklemler, düşük maliyetli donanımlardan elde edilen verilerin fiziksel tutarlılığını doğrulamak için kullanılır.</p>'
         },
         {
           id: 'sabah-isiginda-orta-format-denemeleri',
@@ -1114,6 +1114,11 @@
      10. Bootstrap
      ======================================================================== */
   async function init() {
+    if (isLocalEnvironment()) {
+      const previewBanner = document.getElementById('local-preview-banner');
+      if (previewBanner) previewBanner.hidden = false;
+    }
+
     initTheme();
     initMobileNav();
     initDeterrence();
