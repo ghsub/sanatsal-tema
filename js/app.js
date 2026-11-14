@@ -296,9 +296,9 @@
     const entries = (json && json.feed && Array.isArray(json.feed.entry)) ? json.feed.entry : [];
     const parsed = {
       profile: {
-        name: (json.feed && json.feed.title && json.feed.title.$t) || 'Kişisel Akademik Portfolyo',
-        role: 'Araştırmacı & Mühendis',
-        bioHtml: '<p>Blogger CMS üzerinden dinamik olarak yüklenen profil içeriği.</p>',
+        name: 'Editoryal & Akademik Arşiv',
+        role: 'Araştırma Notları, Projeler ve Görsel Seçkiler',
+        bioHtml: '<p>Hoş geldiniz. Bu alanda yayınlanan teknik notlar, projeler ve görsel seçkiler dinamik olarak sunulmaktadır. Kişisel profil vitrinini özelleştirmek için Blogger panelinde <code>Hakkimda</code> etiketli bir yayın oluşturabilirsiniz.</p>',
         skills: ['Sistem Mimarisi', 'Uygulama Güvenliği', 'Araştırma'],
         meta: []
       },
@@ -321,7 +321,7 @@
         ? entry.category.map(function (c) { return c.term; })
         : [];
 
-      if (labels.includes('Hakkimda')) {
+      if (labels.some(function (l) { return l.toLowerCase() === 'hakkimda'; })) {
         parsed.profile = parseProfileEntry(title, rawHtml, parsed.profile.name);
         const contactExtracted = parseContactFromHtml(rawHtml);
         if (contactExtracted.socials.length || contactExtracted.encodedEmail) {
@@ -659,7 +659,12 @@
 
     if (metaEl) {
       metaEl.innerHTML = '';
-      (p.meta || []).forEach(function (m) {
+      const catalogStats = [
+        { label: 'Toplam Yazı', value: state.data.articles.length + ' Makale' },
+        { label: 'Portfolyo Projesi', value: state.data.portfolio.length + ' Proje' },
+        { label: 'Galeri Fotoğrafı', value: state.data.gallery.length + ' Kare' }
+      ];
+      catalogStats.forEach(function (m) {
         const li = document.createElement('li');
         li.className = 'hero-meta-item';
         const lbl = document.createElement('span');
