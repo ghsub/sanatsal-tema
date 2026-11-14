@@ -1113,6 +1113,20 @@
   /* ========================================================================
      10. Bootstrap
      ======================================================================== */
+  function ensureDOMPurify() {
+    if (typeof window.DOMPurify !== 'undefined' && window.DOMPurify && typeof window.DOMPurify.sanitize === 'function') {
+      return Promise.resolve();
+    }
+    return new Promise(function (resolve) {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/dompurify@3.4.16/dist/purify.min.js';
+      s.crossOrigin = 'anonymous';
+      s.onload = function () { resolve(); };
+      s.onerror = function () { resolve(); };
+      document.head.appendChild(s);
+    });
+  }
+
   async function init() {
     if (isLocalEnvironment()) {
       const previewBanner = document.getElementById('local-preview-banner');
@@ -1126,7 +1140,8 @@
 
     const [botDetected, loadedData] = await Promise.all([
       evaluateBotStatus(),
-      loadContentData()
+      loadContentData(),
+      ensureDOMPurify()
     ]);
 
     state.isBot = botDetected;
